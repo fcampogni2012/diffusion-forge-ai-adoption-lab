@@ -8,11 +8,12 @@ import {
   BrainCircuit,
   Building2,
   CheckCircle2,
-  CircleAlert,
-  Clock3,
+  ChevronLeft,
+  ChevronRight,
   Eye,
   Flame,
   GitBranch,
+  Lightbulb,
   Network,
   Play,
   RotateCcw,
@@ -24,87 +25,82 @@ import {
 } from 'lucide-react';
 import './styles.css';
 
-const conceptNodes = [
+const lessons = [
   {
-    id: 'innovation',
-    label: 'Innovation',
-    chapter: 'Ch. 1',
-    icon: Sparkles,
-    position: [-2.15, 1.2, 0],
-    color: '#5bd8ff',
-    summary: 'An idea, practice, or object perceived as new by the adopting unit.',
-    lesson: 'Newness lives in the user. AI may feel obvious to leadership and still feel foreign to frontline teams.',
-    aiMove: 'Translate AI into the exact work each team already cares about.'
+    id: 'definition',
+    chapter: 'Chapter 1',
+    title: 'Diffusion means ideas move through people',
+    plain: 'Diffusion is how a new idea, practice, or tool spreads through communication channels over time inside a social system.',
+    story: 'Boiling water was medically smart in the Peruvian village, but it failed because the meaning was wrong. Healthy people did not see boiled water as normal. The lesson is simple: a technically correct idea can still be socially wrong.',
+    diagram: ['New idea', 'Trusted channel', 'Social meaning', 'Adoption or rejection'],
+    remember: 'Innovation is not a feature. Innovation is a social process.',
+    ai: 'Do not announce “AI transformation.” Translate AI into the language of each team: less duplicate entry, faster review, cleaner handoffs, fewer late follow-ups.',
+    check: 'If people ignore a useful AI tool, what might be missing besides training?'
   },
   {
     id: 'attributes',
-    label: 'Five Attributes',
-    chapter: 'Ch. 6',
-    icon: Eye,
-    position: [0, 1.7, -0.5],
-    color: '#f7c948',
-    summary: 'Relative advantage, compatibility, complexity, trialability, and observability shape adoption speed.',
-    lesson: 'People adopt what feels better, fits their world, is simple enough, can be tried, and produces visible proof.',
-    aiMove: 'Make AI visibly useful, low-risk, workflow-native, and easy to explain.'
+    chapter: 'Chapter 6',
+    title: 'People adopt what feels useful, safe, visible, and easy to try',
+    plain: 'Rogers says adoption speed depends on five perceived attributes: relative advantage, compatibility, complexity, trialability, and observability.',
+    story: 'A tool can be powerful and still fail if it feels hard, risky, invisible, or mismatched with daily work. People adopt what they can understand, test, and see working.',
+    diagram: ['Better than old way', 'Fits current work', 'Simple enough', 'Safe to try', 'Wins are visible'],
+    remember: 'The user’s perception is the adoption surface.',
+    ai: 'Make every AI workflow obviously better, embedded in current work, low-risk, and visible through real before-and-after examples.',
+    check: 'Which one attribute is weakest in your company right now?'
   },
   {
-    id: 'decision',
-    label: 'Decision Journey',
-    chapter: 'Ch. 5',
-    icon: GitBranch,
-    position: [2.05, 1.05, 0],
-    color: '#7df2a0',
-    summary: 'Adoption moves through knowledge, persuasion, decision, implementation, and confirmation.',
-    lesson: 'Resistance often means the person is stuck in a specific stage, not that they hate the innovation.',
-    aiMove: 'Match the intervention to the stage: clarity, trust, safe trial, support, reinforcement.'
+    id: 'process',
+    chapter: 'Chapter 5',
+    title: 'Adoption is a journey, not a yes/no moment',
+    plain: 'People move through knowledge, persuasion, decision, implementation, and confirmation. Each stage needs different help.',
+    story: 'Someone who has never seen the tool needs clarity. Someone who is trying it needs support. Someone who already used it needs proof they made the right choice.',
+    diagram: ['Know it exists', 'Trust it', 'Choose a trial', 'Use it in work', 'Keep using it'],
+    remember: 'Different stage, different intervention.',
+    ai: 'Stop giving one generic AI training to everyone. Map teams by stage, then give them the next support they actually need.',
+    check: 'Is your team in knowledge, persuasion, decision, implementation, or confirmation?'
   },
   {
     id: 'networks',
-    label: 'Peer Networks',
-    chapter: 'Ch. 8',
-    icon: Network,
-    position: [-1.42, -0.34, 1.28],
-    color: '#b69cff',
-    summary: 'Diffusion travels through trusted interpersonal networks and opinion leaders.',
-    lesson: 'The most innovative person is not always the best messenger. Credible near-peers move the majority.',
-    aiMove: 'Find advice-seeking hubs and make respected operators the proof carriers.'
-  },
-  {
-    id: 'agents',
-    label: 'Change Agents',
-    chapter: 'Ch. 9',
-    icon: Users,
-    position: [1.42, -0.42, 1.18],
-    color: '#ff8f70',
-    summary: 'Change agents bridge the innovation source and the client system.',
-    lesson: 'Good change agents diagnose needs, translate meaning, support trials, and reduce dependence over time.',
-    aiMove: 'Give AI adoption owners a field job: remove friction, broker trust, and build local capability.'
+    chapter: 'Chapters 7-8',
+    title: 'The right messenger matters more than the loudest message',
+    plain: 'Diffusion runs through peer networks. Opinion leaders make a new behavior feel normal and safe.',
+    story: 'The most experimental person may be too strange for the mainstream to copy. The best messenger is usually a respected near-peer who understands the group.',
+    diagram: ['Early user', 'Trusted peer', 'Small group', 'Critical mass'],
+    remember: 'Map advice-seeking ties, not job titles.',
+    ai: 'Build champion cells: respected operators, managers, analysts, sellers, clinicians, and engineers teaching near-peers through real examples.',
+    check: 'Who do people already ask for help before changing how they work?'
   },
   {
     id: 'organizations',
-    label: 'Organizations',
-    chapter: 'Ch. 10',
-    icon: Building2,
-    position: [0, -1.18, -0.62],
-    color: '#f4f7fb',
-    summary: 'Organizations adopt through authority, politics, champions, routines, and implementation work.',
-    lesson: 'Adoption is the opening bell. Implementation is the fight.',
-    aiMove: 'Build champion networks, local re-invention, SOP updates, and routinization rituals.'
+    chapter: 'Chapter 10',
+    title: 'Organizations do not install innovations. They negotiate them into place',
+    plain: 'In organizations, adoption is only the midpoint. The hard work is implementation, adaptation, clarification, and routinization.',
+    story: 'A champion keeps the idea alive through politics, friction, uncertainty, procurement, training, and workflow fit. Without champions, useful ideas die quietly.',
+    diagram: ['Agenda setting', 'Champion network', 'Fit test', 'Local adaptation', 'Routine work'],
+    remember: 'Adoption is the opening bell. Implementation is the fight.',
+    ai: 'Treat AI rollout as an operating model: champions, workflow redesign, safe review rules, manager rituals, SOPs, and weekly proof loops.',
+    check: 'Where would AI have to change your routines, not just your software?'
+  },
+  {
+    id: 'consequences',
+    chapter: 'Chapter 11',
+    title: 'Fast adoption still needs judgment',
+    plain: 'Innovations create consequences: intended and unintended, helpful and harmful, direct and indirect.',
+    story: 'Diffusion is not automatically good. A tool can increase advantage for some people while widening gaps for others.',
+    diagram: ['Who benefits?', 'Who pays?', 'What changes?', 'What breaks?', 'What must we repair?'],
+    remember: 'Responsible speed beats blind speed.',
+    ai: 'Move fast with guardrails: human review, clear boundaries, audit trails, role-specific training, and honest measurement of harms and wins.',
+    check: 'What risk would make people slow down unless we design trust into the workflow?'
   }
 ];
 
-const chapters = [
-  ['1', 'Elements', 'Innovation, channels, time, social system. Useful is not enough.'],
-  ['2', 'Research Traditions', 'Diffusion is a cross-domain toolkit that itself diffused.'],
-  ['3', 'Critique', 'Avoid pro-innovation bias and individual-blame bias.'],
-  ['4', 'Generation', 'Innovations are shaped through problem recognition and development.'],
-  ['5', 'Decision Process', 'Knowledge, persuasion, decision, implementation, confirmation.'],
-  ['6', 'Attributes', 'Advantage, fit, simplicity, trial, visibility.'],
-  ['7', 'Adopter Categories', 'Innovators to laggards; timing is not morality.'],
-  ['8', 'Networks', 'Opinion leaders and critical mass accelerate spread.'],
-  ['9', 'Change Agents', 'Trusted bridges beat distant announcements.'],
-  ['10', 'Organizations', 'Adoption must be implemented, clarified, and routinized.'],
-  ['11', 'Consequences', 'Ask who benefits, who pays, and what changes after.']
+const conceptNodes = [
+  { id: 'definition', label: 'Idea moves', position: [-1.8, 1, 0], color: '#5bd8ff', icon: Sparkles },
+  { id: 'attributes', label: 'Attributes', position: [0, 1.45, -0.4], color: '#f7c948', icon: Eye },
+  { id: 'process', label: 'Journey', position: [1.8, 0.9, 0], color: '#7df2a0', icon: GitBranch },
+  { id: 'networks', label: 'Peers', position: [-1.35, -0.45, 1.1], color: '#b69cff', icon: Network },
+  { id: 'organizations', label: 'Company', position: [1.35, -0.55, 1.05], color: '#ff8f70', icon: Building2 },
+  { id: 'consequences', label: 'Judgment', position: [0, -1.25, -0.6], color: '#f4f7fb', icon: ShieldCheck }
 ];
 
 const leverDefaults = {
@@ -137,8 +133,8 @@ function NodeMesh({ node, selected, onSelect }) {
   return (
     <group position={node.position} onClick={() => onSelect(node.id)}>
       <mesh>
-        <sphereGeometry args={[selected ? 0.24 : 0.18, 32, 32]} />
-        <meshStandardMaterial color={node.color} emissive={node.color} emissiveIntensity={selected ? 0.7 : 0.25} />
+        <sphereGeometry args={[selected ? 0.24 : 0.17, 32, 32]} />
+        <meshStandardMaterial color={node.color} emissive={node.color} emissiveIntensity={selected ? 0.72 : 0.28} />
       </mesh>
       <Html center distanceFactor={7}>
         <button className={`node-label ${selected ? 'is-selected' : ''}`} onClick={() => onSelect(node.id)}>
@@ -151,7 +147,7 @@ function NodeMesh({ node, selected, onSelect }) {
 }
 
 function DiffusionField({ selectedId, onSelect, score }) {
-  const rings = useMemo(() => [1.1, 1.75, 2.4, 3.05], []);
+  const rings = useMemo(() => [1.05, 1.65, 2.25, 2.85], []);
   return (
     <Canvas camera={{ position: [0, 0.55, 6.9], fov: 40 }}>
       <color attach="background" args={['#080b10']} />
@@ -159,10 +155,10 @@ function DiffusionField({ selectedId, onSelect, score }) {
       <pointLight position={[3, 4, 5]} intensity={14} color="#bdefff" />
       <pointLight position={[-3, -2, 2]} intensity={7} color="#f7c948" />
       <Suspense fallback={null}>
-        <group rotation={[0.15, -0.18, 0]} scale={0.92}>
+        <group rotation={[0.12, -0.16, 0]} scale={0.92}>
           {rings.map((r, index) => (
             <mesh key={r} rotation={[Math.PI / 2, 0, 0]}>
-              <torusGeometry args={[r, 0.006 + index * 0.002, 96, 8]} />
+              <torusGeometry args={[r, 0.007 + index * 0.002, 96, 8]} />
               <meshStandardMaterial color={index < score / 25 ? '#5bd8ff' : '#263241'} emissive="#21384a" />
             </mesh>
           ))}
@@ -178,20 +174,8 @@ function DiffusionField({ selectedId, onSelect, score }) {
           </Html>
         </group>
       </Suspense>
-      <OrbitControls enablePan={false} minDistance={4.2} maxDistance={8} autoRotate autoRotateSpeed={0.32} />
+      <OrbitControls enablePan={false} minDistance={4.2} maxDistance={8} autoRotate autoRotateSpeed={0.28} />
     </Canvas>
-  );
-}
-
-function Metric({ label, value, icon: Icon }) {
-  return (
-    <div className="metric">
-      <Icon size={16} aria-hidden="true" />
-      <div>
-        <span>{label}</span>
-        <strong>{value}</strong>
-      </div>
-    </div>
   );
 }
 
@@ -199,118 +183,149 @@ function Lever({ id, label, value, onChange }) {
   return (
     <label className="lever" htmlFor={id}>
       <span>{label}</span>
-      <input
-        id={id}
-        type="range"
-        min="0"
-        max="100"
-        value={value}
-        onChange={(event) => onChange(id, Number(event.target.value))}
-      />
+      <input id={id} type="range" min="0" max="100" value={value} onChange={(event) => onChange(id, Number(event.target.value))} />
       <strong>{value}</strong>
     </label>
   );
 }
 
+function LearningDiagram({ steps }) {
+  return (
+    <div className="learning-diagram" aria-label="Lesson diagram">
+      {steps.map((step, index) => (
+        <React.Fragment key={step}>
+          <div className="diagram-step">
+            <span>{index + 1}</span>
+            <strong>{step}</strong>
+          </div>
+          {index < steps.length - 1 && <ArrowRight className="diagram-arrow" size={18} aria-hidden="true" />}
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
 function App() {
-  const [selectedId, setSelectedId] = useState('attributes');
+  const [lessonIndex, setLessonIndex] = useState(0);
+  const [selectedId, setSelectedId] = useState('definition');
   const [levers, setLevers] = useState(leverDefaults);
-  const selectedNode = conceptNodes.find((node) => node.id === selectedId);
-  const SelectedIcon = selectedNode.icon;
+  const lesson = lessons[lessonIndex];
   const score = adoptionScore(levers);
+  const progress = Math.round(((lessonIndex + 1) / lessons.length) * 100);
+
+  const chooseLesson = (index) => {
+    setLessonIndex(index);
+    setSelectedId(lessons[index].id);
+  };
+
+  const chooseNode = (id) => {
+    const nextIndex = lessons.findIndex((item) => item.id === id);
+    setSelectedId(id);
+    if (nextIndex >= 0) setLessonIndex(nextIndex);
+  };
 
   const updateLever = (id, value) => setLevers((current) => ({ ...current, [id]: value }));
 
   return (
-    <main className="app-shell">
-      <section className="hero-panel" aria-labelledby="app-title">
+    <main className="app-shell course-shell">
+      <section className="course-hero" aria-labelledby="app-title">
         <div className="hero-copy">
           <p className="eyebrow"><Zap size={14} aria-hidden="true" /> Diffusion Forge</p>
-          <h1 id="app-title">Learn the book. Forge rapid AI adoption.</h1>
+          <h1 id="app-title">Learn the book one idea at a time.</h1>
           <p>
-            A visual lab for Rogers' diffusion model, built around one conviction:
-            the first company to make AI normal work gains a compounding advantage before the rest of the market crosses over.
+            A guided visual course for Rogers' <em>Diffusion of Innovations</em>. Each lesson gives you a plain-English idea,
+            a real story, a diagram, a memory hook, and the exact move for rapid responsible AI adoption.
           </p>
         </div>
         <div className="hero-actions" aria-label="Primary learning actions">
-          <a className="button primary" href="#field"><Play size={16} aria-hidden="true" /> Start lab</a>
-          <a className="button secondary" href="#company"><Building2 size={16} aria-hidden="true" /> Company playbook</a>
+          <a className="button primary" href="#lesson"><Play size={16} aria-hidden="true" /> Start lesson 1</a>
+          <a className="button secondary" href="#company"><Building2 size={16} aria-hidden="true" /> AI adoption plan</a>
         </div>
       </section>
 
-      <section id="field" className="studio-grid">
-        <aside className="chapter-rail" aria-label="Book chapter map">
-          <div className="section-heading">
-            <BookOpen size={18} aria-hidden="true" />
-            <div>
-              <span>Book map</span>
-              <strong>11 chapters</strong>
-            </div>
+      <section className="learning-path" aria-label="Learning path">
+        <div className="path-topline">
+          <div>
+            <span>Guided course</span>
+            <strong>{progress}% through the core model</strong>
           </div>
-          <div className="chapter-list">
-            {chapters.map(([number, title, summary]) => (
-              <article key={number} className="chapter-card">
-                <span>{number}</span>
-                <div>
-                  <strong>{title}</strong>
-                  <p>{summary}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </aside>
+          <div className="progress-bar" aria-hidden="true"><i style={{ width: `${progress}%` }} /></div>
+        </div>
+        <div className="lesson-tabs" role="tablist" aria-label="Book lesson sequence">
+          {lessons.map((item, index) => (
+            <button
+              key={item.id}
+              role="tab"
+              aria-selected={index === lessonIndex}
+              className={index === lessonIndex ? 'is-active' : ''}
+              onClick={() => chooseLesson(index)}
+            >
+              <span>{index + 1}</span>
+              {item.title}
+            </button>
+          ))}
+        </div>
+      </section>
 
-        <section className="viewport-panel" aria-label="Interactive diffusion field">
-          <div className="panel-topline">
+      <section id="lesson" className="lesson-stage">
+        <article className="lesson-card">
+          <div className="lesson-kicker">
+            <span>{lesson.chapter}</span>
+            <strong>Lesson {lessonIndex + 1} of {lessons.length}</strong>
+          </div>
+          <h2>{lesson.title}</h2>
+          <div className="plain-box">
+            <Lightbulb size={18} aria-hidden="true" />
+            <p>{lesson.plain}</p>
+          </div>
+          <div className="lesson-grid">
+            <section>
+              <h3>Real story</h3>
+              <p>{lesson.story}</p>
+            </section>
+            <section>
+              <h3>Memory hook</h3>
+              <p>{lesson.remember}</p>
+            </section>
+          </div>
+          <h3>Picture the idea</h3>
+          <LearningDiagram steps={lesson.diagram} />
+          <div className="ai-translation">
+            <Flame size={18} aria-hidden="true" />
             <div>
-              <span>Social system model</span>
-              <strong>{adoptionLabel(score)}</strong>
+              <span>Apply it to company-wide AI adoption</span>
+              <p>{lesson.ai}</p>
             </div>
-            <button className="icon-button" onClick={() => setLevers(leverDefaults)} aria-label="Reset adoption levers">
-              <RotateCcw size={16} aria-hidden="true" />
+          </div>
+          <div className="check-row">
+            <div>
+              <span>Check your understanding</span>
+              <strong>{lesson.check}</strong>
+            </div>
+          </div>
+          <div className="lesson-actions">
+            <button className="button secondary" disabled={lessonIndex === 0} onClick={() => chooseLesson(lessonIndex - 1)}>
+              <ChevronLeft size={16} aria-hidden="true" /> Previous
+            </button>
+            <button className="button primary" disabled={lessonIndex === lessons.length - 1} onClick={() => chooseLesson(lessonIndex + 1)}>
+              Next lesson <ChevronRight size={16} aria-hidden="true" />
             </button>
           </div>
-          <div className="canvas-wrap">
-            <DiffusionField selectedId={selectedId} onSelect={setSelectedId} score={score} />
-          </div>
-          <div className="metrics-row">
-            <Metric icon={Target} label="Adoption force" value={`${score}%`} />
-            <Metric icon={Network} label="Network state" value={adoptionLabel(score)} />
-            <Metric icon={Clock3} label="Goal" value="routinize" />
-          </div>
-        </section>
+        </article>
 
-        <aside className="inspector-panel" aria-label="Selected concept details">
-          <div className="section-heading">
-            <SelectedIcon size={18} aria-hidden="true" />
+        <aside className="system-side" aria-label="Visual system map">
+          <div className="panel-topline">
             <div>
-              <span>{selectedNode.chapter}</span>
-              <strong>{selectedNode.label}</strong>
+              <span>3D memory map</span>
+              <strong>{lesson.title}</strong>
             </div>
           </div>
-          <p className="summary">{selectedNode.summary}</p>
-          <div className="insight-block">
-            <span>Book lesson</span>
-            <p>{selectedNode.lesson}</p>
+          <div className="mini-canvas-wrap">
+            <DiffusionField selectedId={selectedId} onSelect={chooseNode} score={score} />
           </div>
-          <div className="insight-block accent">
-            <span>AI adoption move</span>
-            <p>{selectedNode.aiMove}</p>
-          </div>
-          <div className="concept-buttons">
-            {conceptNodes.map((node) => (
-              <button
-                key={node.id}
-                className={node.id === selectedId ? 'is-active' : ''}
-                onClick={() => setSelectedId(node.id)}
-              >
-                {node.label}
-              </button>
-            ))}
-          </div>
-          <div className="empty-state" aria-live="polite">
-            <strong>No concept selected?</strong>
-            <p>Choose a node in the field or a concept button to inspect the adoption move.</p>
+          <div className="side-note">
+            <BookOpen size={16} aria-hidden="true" />
+            <p>Click a node to jump lessons. The center is the AI age; the rings are the social system that must absorb the new behavior.</p>
           </div>
         </aside>
       </section>
@@ -319,55 +334,49 @@ function App() {
         <div className="section-heading">
           <BrainCircuit size={18} aria-hidden="true" />
           <div>
-            <span>Adoption simulator</span>
-            <strong id="sim-title">Move the levers Rogers gives us</strong>
+            <span>Practice lab</span>
+            <strong id="sim-title">Make adoption easier, then watch the system move</strong>
           </div>
         </div>
         <div className="simulator-grid">
           <div className="levers">
-            <Lever id="advantage" label="Relative advantage" value={levers.advantage} onChange={updateLever} />
-            <Lever id="compatibility" label="Workflow compatibility" value={levers.compatibility} onChange={updateLever} />
-            <Lever id="trial" label="Low-risk trialability" value={levers.trial} onChange={updateLever} />
-            <Lever id="visibility" label="Observable wins" value={levers.visibility} onChange={updateLever} />
-            <Lever id="champions" label="Trusted champions" value={levers.champions} onChange={updateLever} />
+            <Lever id="advantage" label="People see a real advantage" value={levers.advantage} onChange={updateLever} />
+            <Lever id="compatibility" label="It fits daily workflow" value={levers.compatibility} onChange={updateLever} />
+            <Lever id="trial" label="They can try it safely" value={levers.trial} onChange={updateLever} />
+            <Lever id="visibility" label="Wins are visible" value={levers.visibility} onChange={updateLever} />
+            <Lever id="champions" label="Trusted peers teach it" value={levers.champions} onChange={updateLever} />
           </div>
           <div className="score-card">
             <span>Predicted diffusion state</span>
             <strong>{score}%</strong>
             <p>{adoptionLabel(score)}</p>
-            <div className="score-bar" aria-hidden="true">
-              <i style={{ width: `${score}%` }} />
-            </div>
-            <p>
-              Push the system past pilot energy by increasing visible proof and trusted peer carriers.
-              That is the bridge from executive excitement to company-wide AI behavior.
-            </p>
+            <div className="score-bar" aria-hidden="true"><i style={{ width: `${score}%` }} /></div>
+            <p>Rogers' lesson: adoption accelerates when uncertainty falls and trusted proof travels through the social system.</p>
+            <button className="button secondary reset-button" onClick={() => setLevers(leverDefaults)}>
+              <RotateCcw size={16} aria-hidden="true" /> Reset levers
+            </button>
           </div>
         </div>
       </section>
 
-      <section id="company" className="company-grid" aria-labelledby="company-title">
+      <section id="company" className="company-playbook-simple" aria-labelledby="company-title">
         <div className="company-thesis">
           <p className="eyebrow"><Flame size={14} aria-hidden="true" /> First company past advantage</p>
           <h2 id="company-title">The AI adoption race is a diffusion race.</h2>
           <p>
-            The companies that normalize AI first will not merely save time. They will learn faster, compound capability,
-            redesign workflows, and pull away while slower firms are still debating permission.
-          </p>
-          <p>
-            The message from the book is not blind speed. It is engineered speed: meaning, trust, safe trials, peer proof,
-            champion networks, local re-invention, and routinization.
+            The first company to make AI normal work will compound learning faster than competitors.
+            The goal is not blind hype. The goal is engineered speed: trust, trials, peer proof, local adaptation, and routine use.
           </p>
         </div>
-        <div className="playbook">
+        <div className="adoption-roadmap">
           {[
-            ['1', 'Build dense champion cells', 'Recruit credible insiders in each workflow, not just executives.'],
-            ['2', 'Make wins visible weekly', 'Publish concrete before-and-after proof from real teams.'],
-            ['3', 'Lower trial risk', 'Start with reversible, human-reviewed workflows.'],
-            ['4', 'Let teams re-invent', 'Standardize guardrails while local teams adapt templates and routines.'],
-            ['5', 'Routinize fast', 'Move adoption into SOPs, onboarding, dashboards, and manager rituals.']
+            ['1', 'Pick one painful workflow', 'Start where AI removes obvious friction.'],
+            ['2', 'Recruit trusted peers', 'Use respected operators as teachers, not just executives.'],
+            ['3', 'Run safe trials', 'Make the first use reversible and human-reviewed.'],
+            ['4', 'Show visible proof', 'Publish real before-and-after wins every week.'],
+            ['5', 'Make it routine', 'Update SOPs, dashboards, onboarding, and manager rituals.']
           ].map(([number, title, body]) => (
-            <article key={number} className="play-card">
+            <article key={number} className="roadmap-card">
               <span>{number}</span>
               <div>
                 <strong>{title}</strong>
@@ -378,26 +387,26 @@ function App() {
         </div>
       </section>
 
-      <section className="learning-grid" aria-label="Learning tools">
+      <section className="learning-grid" aria-label="Quick recall cards">
         <article className="tool-card">
           <CheckCircle2 size={18} aria-hidden="true" />
-          <strong>Recall hook</strong>
+          <strong>Book in one line</strong>
           <p>Diffusion is how social systems metabolize novelty.</p>
         </article>
         <article className="tool-card">
-          <CircleAlert size={18} aria-hidden="true" />
-          <strong>Failure warning</strong>
-          <p>Access is not adoption. Training is not routinization.</p>
+          <Target size={18} aria-hidden="true" />
+          <strong>Adoption target</strong>
+          <p>The win is not access. The win is repeated use in real work.</p>
         </article>
         <article className="tool-card">
-          <ShieldCheck size={18} aria-hidden="true" />
-          <strong>Responsible speed</strong>
-          <p>Move fast by designing trust, review, and safe boundaries into the workflow.</p>
+          <Users size={18} aria-hidden="true" />
+          <strong>Human lever</strong>
+          <p>Trusted peers change behavior faster than distant announcements.</p>
         </article>
         <article className="tool-card">
           <ArrowRight size={18} aria-hidden="true" />
-          <strong>Next action</strong>
-          <p>Pick one workflow, one champion cell, one visible proof loop, and one 30-day routinization target.</p>
+          <strong>Next move</strong>
+          <p>Choose one team, one workflow, one champion cell, and one visible proof loop.</p>
         </article>
       </section>
     </main>
